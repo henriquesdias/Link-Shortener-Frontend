@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import RankingView from "../views/RankingView.vue";
+import SignInViewVue from "@/views/SignInView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/ranking",
       name: "ranking",
       component: RankingView
+    },
+    {
+      path: "/sign-in",
+      name: "sign-in",
+      component: SignInViewVue
     }
   ]
 });

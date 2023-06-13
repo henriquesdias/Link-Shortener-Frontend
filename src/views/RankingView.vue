@@ -1,23 +1,23 @@
 <script setup lang="ts">
-  import PrincipalHeader from "../components/PrincipalHeader.vue";
-  import { getTheMostUrlsVisited } from '@/api/urls';
-  import type { URL } from "../protocols"
+import PrincipalHeader from "../components/PrincipalHeader.vue";
+import { getTheMostUrlsVisited } from "@/api/urls";
+import type { URL } from "../protocols";
 </script>
 
 <script lang="ts">
-  export default{
-    data(){
-      return {
-        urls: [] as URL[]
-      }
-    },
-    mounted(){
-      getTheMostUrlsVisited()
-        .then(res => res.json())
-        .then(data => this.urls = data)
-        .catch(error => console.log(error))
-    }
+export default {
+  data() {
+    return {
+      urls: [] as URL[]
+    };
+  },
+  mounted() {
+    getTheMostUrlsVisited()
+      .then((res) => res.json())
+      .then((data) => (this.urls = data))
+      .catch((error) => console.log(error));
   }
+};
 </script>
 
 <template>
@@ -26,7 +26,7 @@
     <div>
       <h1>The most 100 URLs visited</h1>
       <ul>
-        <li v-for="url , index in urls" :key="url.id">
+        <li v-for="(url, index) in urls" :key="url.id">
           <span>{{ index + 1 }}</span>
           <span>{{ url.url }}</span>
           <span>Visits: {{ url.num_visits }}</span>
@@ -37,7 +37,7 @@
 </template>
 
 <style scoped>
-main{
+main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,10 +48,10 @@ main{
     rgba(84, 111, 196, 1) 99%
   );
 }
-h1{
+h1 {
   text-align: center;
 }
-ul{
+ul {
   border: 1px solid black;
   border-radius: 10px;
   height: 400px;
@@ -59,14 +59,14 @@ ul{
   width: 98%;
   margin: 0 auto;
 }
-li{
-    list-style-type: none;
-    height: 30px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+li {
+  list-style-type: none;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-span{
+span {
   padding: 0 5px;
   display: flex;
   align-items: center;

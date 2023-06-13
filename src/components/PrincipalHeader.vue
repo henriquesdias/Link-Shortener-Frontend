@@ -11,7 +11,9 @@ import { RouterLink } from "vue-router";
       <RouterLink to="/" class="custom-link">Link Shortener</RouterLink>
     </span>
     <div>
-      <span>Sign In /</span>
+      <span>
+        <RouterLink to="/sign-in" class="custom-link">Sign In / </RouterLink>
+      </span>
       <span> Sign Up</span>
     </div>
   </header>
@@ -29,7 +31,7 @@ header {
   text-decoration: none;
   color: inherit;
 }
-span:hover{
+span:hover {
   opacity: 0.5;
   transition: opacity 0.2s ease-in-out;
 }
