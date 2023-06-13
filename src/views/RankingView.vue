@@ -13,7 +13,12 @@ export default {
   },
   mounted() {
     getTheMostUrlsVisited()
-      .then((res) => res.json())
+      .then((res) => {        
+        if (res.ok){
+          return res.json();
+        }
+        throw Error;
+      })
       .then((data) => (this.urls = data))
       .catch((error) => console.log(error));
   }

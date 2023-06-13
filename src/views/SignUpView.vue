@@ -8,18 +8,22 @@ import { signUp } from "../api/authentication";
 const router = useRouter();
 const email = ref("");
 const password = ref("");
+const isError = ref(false);
 
 async function submit(e: Event) {
   e.preventDefault();
+  isError.value = false;
   signUp({ email: email.value, password: password.value })
     .then((res) => {
       if (res.ok) {
         router.push("/sign-in");
         return;
       }
-      throw { name: res.statusText };
+      throw Error;
     })
-    .catch((error) => console.log(error));
+    .catch(() => {
+      isError.value = true;
+    });
 }
 </script>
 
@@ -28,6 +32,7 @@ async function submit(e: Event) {
   <main>
     <form v-on:submit.prevent="submit">
       <h1>Sign Up</h1>
+      <span v-if="isError" class="error">This email already in use</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
       <input type="text" placeholder="Your password" v-model="password" required />
       <button>Sign Up</button>
@@ -74,5 +79,8 @@ button {
   border-radius: 5px;
   border: none;
   margin-bottom: 10px;
+}
+.error{
+  color: red;
 }
 </style>

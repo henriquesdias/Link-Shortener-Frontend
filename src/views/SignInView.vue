@@ -9,13 +9,15 @@ const router = useRouter();
 
 const email = ref("");
 const password = ref("");
+const isError = ref(false);
 
 async function submit(e: Event) {
   e.preventDefault();
+  isError.value = false;
   signIn({ email: email.value, password: password.value })
     .then((res) => {
       if (res.ok){
-        return res.json()
+        return res.json();
       }
       throw Error;
     })
@@ -23,7 +25,9 @@ async function submit(e: Event) {
       localStorage.setItem("token", data.token);
       router.push("/");
     })
-    .catch((error) => console.log(error));
+    .catch(() => {
+      isError.value = true;
+    });
 }
 </script>
 
@@ -32,6 +36,7 @@ async function submit(e: Event) {
   <main>
     <form v-on:submit.prevent="submit">
       <h1>Sign In</h1>
+      <span v-if="isError" class="error">The credetials are wrong</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
       <input type="text" placeholder="Your password" v-model="password" required />
       <button>Sign In</button>
@@ -78,5 +83,8 @@ button {
   border-radius: 5px;
   border: none;
   margin-bottom: 10px;
+}
+.error{
+  color: red;
 }
 </style>
