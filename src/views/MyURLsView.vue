@@ -1,7 +1,17 @@
 <script setup lang="ts">
-import PrincipalHeader from "../components/PrincipalHeader.vue";
-import { getTheMostUrlsVisited } from "@/api/urls";
+import PrincipalHeader from "@/components/PrincipalHeader.vue";
+import { getMyUrls, deleteUrl } from "../api/urls";
 import type { URL } from "../protocols";
+
+function deleteOneUrl(id: number) {
+  deleteUrl(id)
+    .then((res) => console.log(res))
+    .catch((error) => console.log(error));
+}
+
+function copyClipboard(text: string) {
+  navigator.clipboard.writeText(`http:localhost:4000/${text}`);
+}
 </script>
 
 <script lang="ts">
@@ -12,7 +22,7 @@ export default {
     };
   },
   mounted() {
-    getTheMostUrlsVisited()
+    getMyUrls()
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -29,12 +39,12 @@ export default {
   <PrincipalHeader />
   <main>
     <div>
-      <h1>The most 100 URLs visited</h1>
+      <h1>Your URLs</h1>
       <ul>
-        <li v-for="(url, index) in urls" :key="url.id">
-          <span>{{ index + 1 }}</span>
+        <li v-for="url in urls" :key="url.id">
           <span>{{ url.url }}</span>
-          <span>Visits: {{ url.num_visits }}</span>
+          <span v-on:click="copyClipboard(url.shortened_url)">Click Here</span>
+          <span v-on:click="deleteOneUrl(url.id)">Exclude</span>
         </li>
       </ul>
     </div>
@@ -53,6 +63,10 @@ main {
     rgba(84, 111, 196, 1) 99%
   );
 }
+div {
+  width: 98%;
+  max-width: 650px;
+}
 h1 {
   text-align: center;
 }
@@ -61,19 +75,27 @@ ul {
   border-radius: 10px;
   height: 400px;
   overflow-y: auto;
-  width: 98%;
   margin: 0 auto;
+  max-width: 400px;
 }
 li {
   list-style-type: none;
   height: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 10px;
 }
 span {
   padding: 0 5px;
   display: flex;
   align-items: center;
+}
+li span:nth-child(2) {
+  background-color: green;
+  cursor: pointer;
+}
+li span:last-child {
+  background-color: red;
+  cursor: pointer;
 }
 </style>

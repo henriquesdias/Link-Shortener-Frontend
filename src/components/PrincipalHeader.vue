@@ -2,11 +2,10 @@
 import { RouterLink } from "vue-router";
 import { ref } from "vue";
 const token = ref(localStorage.getItem("token"));
-function signOut(){
+function signOut() {
   localStorage.removeItem("token");
   token.value = null;
 }
-
 </script>
 
 <template>
@@ -24,8 +23,9 @@ function signOut(){
       <span v-if="token === null">
         <RouterLink to="/sign-up" class="custom-link"> Sign Up</RouterLink>
       </span>
-      <span v-on:click="signOut" v-if="token !== null">
-        Sign out
+      <span v-on:click="signOut" v-if="token !== null"> Sign out / </span>
+      <span v-if="token !== null">
+        <RouterLink to="/my-urls" class="custom-link"> My URLs</RouterLink>
       </span>
     </div>
   </header>
@@ -36,7 +36,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 10px;
   height: 50px;
 }
 .custom-link {

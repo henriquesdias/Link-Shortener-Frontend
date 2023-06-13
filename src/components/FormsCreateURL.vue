@@ -11,7 +11,7 @@ async function submit(e: Event) {
   isError.value = false;
   createShortUrl(url.value)
     .then((res) => {
-      if (res.ok){
+      if (res.ok) {
         return res.json();
       }
       throw Error;
@@ -68,7 +68,7 @@ button {
   border: none;
   margin-bottom: 10px;
 }
-.error{
+.error {
   color: red;
 }
 .short-link {

@@ -16,7 +16,7 @@ async function submit(e: Event) {
   isError.value = false;
   signIn({ email: email.value, password: password.value })
     .then((res) => {
-      if (res.ok){
+      if (res.ok) {
         return res.json();
       }
       throw Error;
@@ -84,7 +84,7 @@ button {
   border: none;
   margin-bottom: 10px;
 }
-.error{
+.error {
   color: red;
 }
 </style>

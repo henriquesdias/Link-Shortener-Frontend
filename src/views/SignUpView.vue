@@ -80,7 +80,7 @@ button {
   border: none;
   margin-bottom: 10px;
 }
-.error{
+.error {
   color: red;
 }
 </style>
