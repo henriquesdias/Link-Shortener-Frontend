@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import { ref } from "vue";
+const token = ref(localStorage.getItem("token"));
+function signOut(){
+  localStorage.removeItem("token");
+  token.value = null;
+}
+
 </script>
 
 <template>
@@ -11,11 +18,14 @@ import { RouterLink } from "vue-router";
       <RouterLink to="/" class="custom-link">Link Shortener</RouterLink>
     </span>
     <div>
-      <span>
+      <span v-if="token === null">
         <RouterLink to="/sign-in" class="custom-link">Sign In / </RouterLink>
       </span>
-      <span>
+      <span v-if="token === null">
         <RouterLink to="/sign-up" class="custom-link"> Sign Up</RouterLink>
+      </span>
+      <span v-on:click="signOut" v-if="token !== null">
+        Sign out
       </span>
     </div>
   </header>
@@ -36,5 +46,6 @@ header {
 span:hover {
   opacity: 0.5;
   transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
 }
 </style>

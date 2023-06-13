@@ -13,7 +13,12 @@ const password = ref("");
 async function submit(e: Event) {
   e.preventDefault();
   signIn({ email: email.value, password: password.value })
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.ok){
+        return res.json()
+      }
+      throw Error;
+    })
     .then((data) => {
       localStorage.setItem("token", data.token);
       router.push("/");

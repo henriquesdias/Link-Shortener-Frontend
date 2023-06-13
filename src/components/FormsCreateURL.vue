@@ -65,7 +65,7 @@ button {
   height: 30px;
 }
 .short-link span:first-child {
-  background-color: rgb(72, 211, 72);
+  background-color: rgb(65, 228, 65);
   height: 30px;
   display: flex;
   align-items: center;
