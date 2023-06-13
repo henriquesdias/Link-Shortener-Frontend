@@ -14,7 +14,9 @@ import { RouterLink } from "vue-router";
       <span>
         <RouterLink to="/sign-in" class="custom-link">Sign In / </RouterLink>
       </span>
-      <span> Sign Up</span>
+      <span>
+        <RouterLink to="/sign-up" class="custom-link"> Sign Up</RouterLink>
+      </span>
     </div>
   </header>
 </template>

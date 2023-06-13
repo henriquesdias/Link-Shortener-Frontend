@@ -3,20 +3,21 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 import PrincipalHeader from "@/components/PrincipalHeader.vue";
-import { signIn } from "../api/authentication";
+import { signUp } from "../api/authentication";
 
 const router = useRouter();
-
 const email = ref("");
 const password = ref("");
 
 async function submit(e: Event) {
   e.preventDefault();
-  signIn({ email: email.value, password: password.value })
-    .then((res) => res.json())
-    .then((data) => {
-      localStorage.setItem("token", data.token);
-      router.push("/");
+  signUp({ email: email.value, password: password.value })
+    .then((res) => {
+      if (res.ok) {
+        router.push("/sign-in");
+        return;
+      }
+      throw { name: res.statusText };
     })
     .catch((error) => console.log(error));
 }
@@ -26,10 +27,10 @@ async function submit(e: Event) {
   <PrincipalHeader />
   <main>
     <form v-on:submit.prevent="submit">
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
       <input type="text" placeholder="Your password" v-model="password" required />
-      <button>Sign In</button>
+      <button>Sign Up</button>
     </form>
   </main>
 </template>
