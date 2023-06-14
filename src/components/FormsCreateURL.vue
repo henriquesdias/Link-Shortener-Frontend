@@ -16,7 +16,7 @@ async function submit(e: Event) {
       }
       throw Error;
     })
-    .then((data) => (shortened_url.value = `http://localhost:4000/${data.shortened_url}`))
+    .then((data) => (shortened_url.value = `${import.meta.env.VITE_BASE_URL}${data.shortened_url}`))
     .catch(() => {
       isError.value = true;
     });

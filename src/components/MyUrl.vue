@@ -12,7 +12,7 @@ function deleteOneUrl(id: number) {
     .catch((error) => console.log(error));
 }
 function copyClipboard(text: string) {
-  navigator.clipboard.writeText(`http:localhost:4000/${text}`);
+  navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}${text}`);
 }
 </script>
 
@@ -46,7 +46,7 @@ li span:last-child {
   cursor: pointer;
 }
 @media (max-width: 390px) {
-  span{
+  span {
     font-size: 14px;
   }
 }
