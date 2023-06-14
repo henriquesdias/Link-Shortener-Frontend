@@ -4,5 +4,7 @@ import PrincipalPageWrapper from "@/components/PrincipalPageWrapper.vue";
 </script>
 
 <template>
-  <PrincipalPageWrapper :children="FormsCreateURL" />
+  <PrincipalPageWrapper>
+    <FormsCreateURL />
+  </PrincipalPageWrapper>
 </template>

@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import type { Component } from "vue";
-
 import PrincipalHeader from "./PrincipalHeader.vue";
-defineProps<{
-  children: Component;
-}>();
 </script>
 
 <template>
   <PrincipalHeader />
   <main>
-    <component :is="children" />
+    <slot />
   </main>
 </template>
 
