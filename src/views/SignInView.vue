@@ -36,7 +36,7 @@ async function submit() {
       <h1>Sign In</h1>
       <span v-if="isError" class="error">The credetials are wrong</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
-      <input type="text" placeholder="Your password" v-model="password" required />
+      <input type="password" placeholder="Your password" v-model="password" required />
       <button>Sign In</button>
     </form>
   </PrincipalPageWrapper>

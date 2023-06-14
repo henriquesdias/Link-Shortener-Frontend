@@ -5,9 +5,11 @@ type AuthBody = {
   password: string;
 };
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export async function signIn(body: AuthBody) {
-  return request.post("http://localhost:4000/sign-in", body);
+  return request.post(`${BASE_URL}sign-in`, body);
 }
 export async function signUp(body: AuthBody) {
-  return request.post("http://localhost:4000/sign-up", body);
+  return request.post(`${BASE_URL}sign-up`, body);
 }
