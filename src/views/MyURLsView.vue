@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import UrlRanking from "@/components/UrlRanking.vue";
-import { getTheMostUrlsVisited } from "@/api/urls";
 import PrincipalPageWrapper from "@/components/PrincipalPageWrapper.vue";
+import MyUrl from "@/components/MyUrl.vue";
+import { getMyUrls } from "../api/urls";
 import type { URL } from "../protocols";
 </script>
 
@@ -13,7 +13,7 @@ export default {
     };
   },
   mounted() {
-    getTheMostUrlsVisited()
+    getMyUrls()
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -29,14 +29,14 @@ export default {
 <template>
   <PrincipalPageWrapper>
     <div>
-      <h1>The most 100 URLs visited</h1>
+      <h1>Your URLs</h1>
       <ul>
-        <UrlRanking
-          v-for="(url, index) in urls"
+        <MyUrl
+          v-for="url in urls"
           :key="url.id"
-          :index="index"
           :url="url.url"
-          :num_visits="url.num_visits"
+          :shortened_url="url.shortened_url"
+          :id="url.id"
         />
       </ul>
     </div>
@@ -44,6 +44,10 @@ export default {
 </template>
 
 <style scoped>
+div {
+  width: 98%;
+  max-width: 650px;
+}
 h1 {
   text-align: center;
 }
@@ -52,7 +56,7 @@ ul {
   border-radius: 10px;
   height: 400px;
   overflow-y: auto;
-  width: 98%;
   margin: 0 auto;
+  max-width: 400px;
 }
 </style>

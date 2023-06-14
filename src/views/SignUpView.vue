@@ -2,51 +2,43 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-import PrincipalHeader from "@/components/PrincipalHeader.vue";
+import PrincipalPageWrapper from "@/components/PrincipalPageWrapper.vue";
 import { signUp } from "../api/authentication";
 
 const router = useRouter();
 const email = ref("");
 const password = ref("");
+const isError = ref(false);
 
-async function submit(e: Event) {
-  e.preventDefault();
+async function submit() {
+  isError.value = false;
   signUp({ email: email.value, password: password.value })
     .then((res) => {
       if (res.ok) {
         router.push("/sign-in");
         return;
       }
-      throw { name: res.statusText };
+      throw Error;
     })
-    .catch((error) => console.log(error));
+    .catch(() => {
+      isError.value = true;
+    });
 }
 </script>
 
 <template>
-  <PrincipalHeader />
-  <main>
-    <form v-on:submit.prevent="submit">
+  <PrincipalPageWrapper>
+    <form @submit.prevent="submit">
       <h1>Sign Up</h1>
+      <span v-if="isError" class="error">This email already in use</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
       <input type="text" placeholder="Your password" v-model="password" required />
       <button>Sign Up</button>
     </form>
-  </main>
+  </PrincipalPageWrapper>
 </template>
 
 <style scoped>
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 50px);
-  background: linear-gradient(
-    42deg,
-    rgba(0, 0, 0, 0.7651435574229692) 0%,
-    rgba(84, 111, 196, 1) 99%
-  );
-}
 form {
   width: 95%;
   max-width: 350px;
@@ -74,5 +66,8 @@ button {
   border-radius: 5px;
   border: none;
   margin-bottom: 10px;
+}
+.error {
+  color: red;
 }
 </style>

@@ -5,12 +5,21 @@ import { createShortUrl } from "../api/urls";
 
 const url = ref("");
 const shortened_url = ref("");
+const isError = ref(false);
 async function submit(e: Event) {
   e.preventDefault();
+  isError.value = false;
   createShortUrl(url.value)
-    .then((res) => res.json())
-    .then((data) => (shortened_url.value = `http://localhost:4000/urls/open/${data.shortened_url}`))
-    .catch((error) => console.log(error));
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw Error;
+    })
+    .then((data) => (shortened_url.value = `http://localhost:4000/${data.shortened_url}`))
+    .catch(() => {
+      isError.value = true;
+    });
 }
 function copyToClipboard() {
   navigator.clipboard.writeText(shortened_url.value);
@@ -20,7 +29,7 @@ function copyToClipboard() {
 <template>
   <form v-on:submit.prevent="submit">
     <h1>Shorten your link</h1>
-    <span></span>
+    <span v-if="isError" class="error">Must be a valid URL</span>
     <input type="text" placeholder="Ex: https://www.freecodecamp.org/" v-model="url" required />
     <button type="submit">Get your link</button>
     <div class="short-link">
@@ -59,13 +68,16 @@ button {
   border: none;
   margin-bottom: 10px;
 }
+.error {
+  color: red;
+}
 .short-link {
   display: flex;
   align-items: center;
   height: 30px;
 }
 .short-link span:first-child {
-  background-color: rgb(72, 211, 72);
+  background-color: rgb(65, 228, 65);
   height: 30px;
   display: flex;
   align-items: center;
