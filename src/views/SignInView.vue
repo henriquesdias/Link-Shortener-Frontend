@@ -11,8 +11,7 @@ const email = ref("");
 const password = ref("");
 const isError = ref(false);
 
-async function submit(e: Event) {
-  e.preventDefault();
+async function submit() {
   isError.value = false;
   signIn({ email: email.value, password: password.value })
     .then((res) => {
@@ -34,7 +33,7 @@ async function submit(e: Event) {
 <template>
   <PrincipalHeader />
   <main>
-    <form v-on:submit.prevent="submit">
+    <form @submit.prevent="submit">
       <h1>Sign In</h1>
       <span v-if="isError" class="error">The credetials are wrong</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />

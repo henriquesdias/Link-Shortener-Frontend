@@ -10,8 +10,7 @@ const email = ref("");
 const password = ref("");
 const isError = ref(false);
 
-async function submit(e: Event) {
-  e.preventDefault();
+async function submit() {
   isError.value = false;
   signUp({ email: email.value, password: password.value })
     .then((res) => {
@@ -30,7 +29,7 @@ async function submit(e: Event) {
 <template>
   <PrincipalHeader />
   <main>
-    <form v-on:submit.prevent="submit">
+    <form @submit.prevent="submit">
       <h1>Sign Up</h1>
       <span v-if="isError" class="error">This email already in use</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />

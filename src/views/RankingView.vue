@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PrincipalHeader from "../components/PrincipalHeader.vue";
+import UrlRanking from "@/components/UrlRanking.vue";
 import { getTheMostUrlsVisited } from "@/api/urls";
 import type { URL } from "../protocols";
 </script>
@@ -31,11 +32,13 @@ export default {
     <div>
       <h1>The most 100 URLs visited</h1>
       <ul>
-        <li v-for="(url, index) in urls" :key="url.id">
-          <span>{{ index + 1 }}</span>
-          <span>{{ url.url }}</span>
-          <span>Visits: {{ url.num_visits }}</span>
-        </li>
+        <UrlRanking
+          v-for="(url, index) in urls"
+          :key="url.id"
+          :index="index"
+          :url="url.url"
+          :num_visits="url.num_visits"
+        />
       </ul>
     </div>
   </main>
@@ -63,17 +66,5 @@ ul {
   overflow-y: auto;
   width: 98%;
   margin: 0 auto;
-}
-li {
-  list-style-type: none;
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-span {
-  padding: 0 5px;
-  display: flex;
-  align-items: center;
 }
 </style>
