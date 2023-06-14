@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import { ref } from "vue";
+
+const router = useRouter();
 const token = ref(localStorage.getItem("token"));
 function signOut() {
   localStorage.removeItem("token");
   token.value = null;
+  router.push("/");
 }
 </script>
 
