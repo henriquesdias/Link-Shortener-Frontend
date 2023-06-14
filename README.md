@@ -24,10 +24,16 @@ Follow the instructions to run the app locally
    npm i
 ```
 
-4. Run script
+4. Create a .env file at the root of the project and fill it in according to the .env.example file. In this case, the "VITE_BASE_URL" variable should be the link where the backend application (configured in step 1) is running, with a "/" at the end. Example:
+
+```code
+http://localhost:4000/
+```
+
+5. Run script
 
 ```bash
   npm run dev
 ```
 
-5. Access http://localhost:5173
+6. Access http://localhost:5173

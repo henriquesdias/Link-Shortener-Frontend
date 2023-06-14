@@ -32,7 +32,7 @@ async function submit() {
       <h1>Sign Up</h1>
       <span v-if="isError" class="error">This email already in use</span>
       <input type="text" placeholder="Your e-mail" v-model="email" required />
-      <input type="text" placeholder="Your password" v-model="password" required />
+      <input type="password" placeholder="Your password" v-model="password" required />
       <button>Sign Up</button>
     </form>
   </PrincipalPageWrapper>
