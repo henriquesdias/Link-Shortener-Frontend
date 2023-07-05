@@ -2,8 +2,6 @@
 
 An easy and practical link shortener.
 
-Video Link: https://drive.google.com/file/d/1xWTl6TXFtJR_0OR_b9VMKddAVFQKX2a7/view?usp=sharing
-
 ## Built With
 
 <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
