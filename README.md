@@ -16,7 +16,7 @@ An easy and practical link shortener.
 
 Follow the instructions to run the app locally
 
-1. First, follow the intructions of a backend application in https://github.com/henriquesdias/SpeedIO-Test-Backend
+1. First, follow the intructions of a backend application in https://github.com/henriquesdias/Link-Shortener-Backend
 2. Clone this repository
 3. Install all dependencies
 
