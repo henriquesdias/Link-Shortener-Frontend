@@ -36,6 +36,6 @@
   },
   "repository": {
     "type":"git",
-    "url": "git+https://github.com/henriquesdias/SpeedIO-Test-Frontend"
+    "url": "git+https://github.com/henriquesdias/Link-Shortener-Frontend"
   }
 }
